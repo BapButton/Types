@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 
 namespace BAP.Types
 {
+	/// <summary>
+	/// Default interface for saving information that a game needs. This is stored in the DB and can be fetched any time the game is active.
+	/// It always saves the information for the currently active game. 
+	/// So if this is used by an auxilary item that kind of acts like a game it won't save and retrieve correctly. 
+	/// </summary>
 	public interface IGameDataSaver
 	{
 		Task<List<(string difficulty, string difficultyDescription)>> GetCurrentScoreBoards();
@@ -16,9 +21,4 @@ namespace BAP.Types
 		Task<bool> UpdateGameStorage<T>(T itemToSave);
 		Task<List<Score>> GetScoresWithNewScoreIfWarranted(Score newScore, int topScoresToTake = 10, bool higherScoreIsBetter = true);
 	}
-	//public interface IGameDataSaver<TGameDesc> : IGameDataSaver where TGameDesc : IBapGameDescription
-	//{
-
-
-	//}
 }

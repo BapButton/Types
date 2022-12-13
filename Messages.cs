@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace BAP.Types
 {
-
+    /// <summary>
+    /// This is a basic Game Event Message to communicate between a game and the hosting page. 
+    /// If your Game page implements the GamePage interface it will be automatically passed into the GameUpdateAsync method.
+    /// </summary>
     public class GameEventMessage
     {
-
         public bool GameEnded { get; set; }
         public string Message { get; set; }
         public bool HighScoreAchieved { get; set; }
@@ -24,19 +26,27 @@ namespace BAP.Types
             PageRefreshRecommended = pageRefreshRecommended;
         }
     }
-
+    /// <summary>
+    /// Basic message to Play Audio from the Current Game
+    /// Use the helper utilities to figure out the full path based on your class to figure out where the nuget is mounted in the system
+    /// </summary>
     public class PlayAudioMessage
     {
-        public string FileName { get; set; }
+        public string FullPathToAudioFileWithFileName { get; set; }
         public bool StopAllPlayingAudio { get; set; }
         public bool ClearAllCachedAudio { get; set; }
         public PlayAudioMessage(string fileName, bool stopAllPlayingAudio = false, bool clearAllCachedAudio = false)
         {
             StopAllPlayingAudio = stopAllPlayingAudio;
             ClearAllCachedAudio = clearAllCachedAudio;
-            FileName = fileName;
+            FullPathToAudioFileWithFileName = fileName;
         }
     }
+
+
+    /// <summary>
+    /// Message whenever a Node is Pressed
+    /// </summary>
     public class ButtonPressedMessage
     {
         public string NodeId { get; set; }
@@ -47,7 +57,9 @@ namespace BAP.Types
             ButtonPress = buttonPress;
         }
     }
-
+    /// <summary>
+    ///Slighly abstracted messaage for receiving Keypresses from a Keyboard. 
+    /// </summary>
     public class KeyboardKeyPressedMessage
     {
         public char KeyValue { get; set; }
@@ -58,20 +70,28 @@ namespace BAP.Types
             ButtonPress = buttonPress;
         }
     }
-
+    /// <summary>
+    /// Basic message that could be used to communicate between a game and the page. 
+    /// Nothing uses this by default
+    /// </summary>
     public class InternalSimpleGameUpdates
     {
         public int CorrectScore { get; set; }
         public int WrongScore { get; set; }
         public bool GameEnded { get; set; }
-        public InternalSimpleGameUpdates(int correctScore, int wrongScore, bool gameEnded)
+        public string ExtraData { get; set; }
+        public InternalSimpleGameUpdates(int correctScore, int wrongScore, bool gameEnded, string extraData)
         {
             CorrectScore = correctScore;
             WrongScore = wrongScore;
             GameEnded = gameEnded;
+            ExtraData = extraData;
         }
     }
-
+    /// <summary>
+    /// Triggered whenever the layout changes. 
+    /// If your game needs to react to layout changes during the game play subscribe to this message.
+    /// </summary>
     public class LayoutChangeMessage
     {
         public int NewButtonLayoutId { get; set; }
@@ -80,7 +100,10 @@ namespace BAP.Types
             NewButtonLayoutId = newButtonLayoutId;
         }
     }
-
+    /// <summary>
+    /// Alerts if a node is added or removed.
+    /// If game play needs to modified based on these events subscribe to these messages
+    /// </summary>
     public class NodeChangeMessage
     {
         public string NodeId { get; set; }
@@ -91,33 +114,10 @@ namespace BAP.Types
             IsRemoved = isRemoved;
         }
     }
-    public class MessageFailedMessage
-    {
-        public string NodeId { get; set; }
-        public MessageFailedMessage(string nodeId)
-        {
-            NodeId = nodeId;
-        }
-    }
-    public class GameStateChangedMessage
-    {
-        public string Message { get; set; }
-        public GameStateChangedMessage(string message)
-        {
-            Message = message;
-        }
-    }
-    public class ButtonImageMessage
-    {
-        public string NodeId { get; set; }
-        public ButtonImage ButtonImage { get; set; }
-        public bool ShowNow { get; set; }
-        public ButtonImageMessage(ButtonImage buttonImage, string nodeId = "")
-        {
-            NodeId = nodeId;
-            ButtonImage = buttonImage;
-        }
-    }
+
+    /// <summary>
+    /// Used by the default Animation Controller to alert that it has completed sending all images for the requested animation.
+    /// </summary>
     public class AnimationCompleteMessage
     {
         public List<string> NodeIds { get; set; }
@@ -127,22 +127,9 @@ namespace BAP.Types
         }
     }
 
-    //public class InternalCustomImageMessage
-    //{
-    //    public string NodeId { get; set; }
-    //    public InternalCustomImage CustomImage { get; set; }
-    //    public InternalCustomImageMessage(InternalCustomImage customImage, string nodeId = "")
-    //    {
-    //        NodeId = nodeId;
-    //        CustomImage = customImage;
-    //    }
-    //    public InternalCustomImageMessage(ulong[,] image, string nodeId = "")
-    //    {
-    //        NodeId = nodeId;
-    //        CustomImage = new(image);
-    //    }
-    //}
-
+    /// <summary>
+    /// Sends a command to a button to restart. If nodeId is blank then all buttons restart
+    /// </summary>
     public class RestartButtonMessage
     {
         public string NodeId { get; set; }
@@ -151,7 +138,9 @@ namespace BAP.Types
             NodeId = nodeId;
         }
     }
-
+    /// <summary>
+    /// Sends a command to a button to turnOff. If nodeId is blank then all buttons turnoff
+    /// </summary>
     public class TurnOffButtonMessage
     {
         public string NodeId { get; set; }
@@ -160,6 +149,9 @@ namespace BAP.Types
             NodeId = nodeId;
         }
     }
+    /// <summary>
+    /// Sends a command to a button to send a status message. If nodeId is blank then all buttons will send a status message
+    /// </summary>
     public class StatusButtonMessage
     {
         public string NodeId { get; set; }
@@ -168,7 +160,10 @@ namespace BAP.Types
             NodeId = nodeId;
         }
     }
-
+    /// <summary>
+    /// Sends an image to the buttons. If nodeId is blank then it will go to all buttons. 
+    /// The buttons will display the image the moment the recieve it
+    /// </summary>
     public class StandardButtonImageMessage
     {
         public string NodeId { get; set; }

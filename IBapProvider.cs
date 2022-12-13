@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace BAP.Types
 {
-	public interface IBapProvider
-	{
-		string Name { get; }
-		Task<bool> Initialize();
-	}
+    /// <summary>
+    /// Basic interface for BapProviders. This is to help with listing and changing the providers. 
+    /// </summary>
+    public interface IBapProvider : IDisposable
+    {
+        string Name { get; }
+        bool AllowMultiple { get; set; }
+        Task<bool> InitializeAsync();
+    }
 }

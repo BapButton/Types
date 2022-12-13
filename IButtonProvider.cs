@@ -4,6 +4,10 @@ using System.Threading.Tasks;
 
 namespace BAP.Types
 {
+    /// <summary>
+    /// Basic Button Provider to get information about the connected buttons.
+    /// </summary>
+    [BapProviderAttribute(false)]
     public interface IButtonProvider : IBapProvider, IDisposable
     {
         List<string> GetConnectedButtons();

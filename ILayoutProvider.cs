@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace BAP.Types
 {
-    public interface ILayoutHandler
+    [BapProviderAttribute(false)]
+    public interface ILayoutProvider : IBapProvider
     {
         ButtonLayout? SetNewButtonLayout(ButtonLayout? bl);
         ButtonLayout? CurrentButtonLayout { get; }

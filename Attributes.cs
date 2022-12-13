@@ -1,13 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
 
 namespace BAP.Types
 {
+
+    [AttributeUsage(AttributeTargets.Interface, Inherited = true)]
+    public class BapProviderAttribute : Attribute
+    {
+        public bool AllowMultipleInstances { get; set; }
+        public BapProviderAttribute(bool allowMultipleInstances = false)
+        {
+            AllowMultipleInstances = allowMultipleInstances;
+        }
+    }
+
+
+    /// <summary>
+    /// This is the entry point for a game. It is the page that you wanted loaded to start the game
+    /// This will probably also change once the page is started to show a score or status on the game. 
+    /// This must implement IComponent or it cannot be loaded. 
+    /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class GamePageAttribute : Attribute
     {
@@ -21,7 +32,11 @@ namespace BAP.Types
             UniqueId = string.IsNullOrEmpty(uniqueId) ? this.GetType().FullName ?? "" : uniqueId;
         }
     }
-
+    /// <summary>
+    /// Apply this to a component that you want to show up either in the full app menu or on the side nav. 
+    /// Users can choose if it actually shows in the side nav but your suggestion will be honored until overridden by the user.
+    /// Make sure you have a page attribute or @page so that there is somewhere to navigate when it is clicked. 
+    /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class MenuItemAttribute : Attribute
     {
@@ -37,9 +52,14 @@ namespace BAP.Types
             UniqueId = string.IsNullOrEmpty(uniqueId) ? this.GetType().FullName ?? "" : uniqueId;
         }
     }
-
+    /// <summary>
+    /// Apply this to a small component that you want loaded into the top Menu. It must implement IComponent
+    /// Most likely it will link to another component when clicked. Give that over page a path attribute or @path component
+    /// Then you can navigate to that page using the built in navigation.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class TopMenuAttribute : Attribute
     {
+
     }
 }
