@@ -2,20 +2,36 @@
 
 namespace BAP.Types
 {
-
-    [AttributeUsage(AttributeTargets.Interface, Inherited = true)]
+    /// <summary>
+    /// This goes on the class that implements a provider interface
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class BapProviderAttribute : Attribute
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string UniqueId { get; set; }
+        public BapProviderAttribute(string name, string description, string uniqueId)
+        {
+            Name = name;
+            Description = description;
+            UniqueId = uniqueId;
+        }
+    }
+    /// <summary>
+    /// This goes on the Interfaces that define a new type of Provider
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Interface, Inherited = false)]
+    public class BapProviderInterfaceAttribute : Attribute
     {
         public bool AllowMultipleInstances { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string UniqueId { get; set; }
-        public BapProviderAttribute(string name, string description, string uniqueId, bool allowMultipleInstances = false)
+        public BapProviderInterfaceAttribute(string name, string description, bool allowMultipleInstances = false)
         {
             AllowMultipleInstances = allowMultipleInstances;
             Name = name;
             Description = description;
-            UniqueId = uniqueId;
         }
     }
 
