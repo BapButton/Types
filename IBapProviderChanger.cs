@@ -36,6 +36,6 @@ namespace BAP.Types
         /// </summary>
         /// <typeparam name="T">The Parent type of the BapProvider that you want to retrieve like IButtonProvider or ILayoutProvider/typeparam>
         /// <returns>True means it sucesfully updated. False, means it failed to update for any reason.</returns>
-        public T? GetCurrentBapProvider<T>() where T : IBapProvider
+        public T? GetCurrentBapProvider<T>() where T : IBapProvider;
     }
 }
