@@ -8,7 +8,12 @@ namespace BAP.Types
 {
     public interface IBapProviderChanger
     {
-        public List<T> GetAvailableBapProviders<T>() where T : IBapProvider;
+        /// <summary>
+        /// Gets the types that implement the provided Bap Provider
+        /// </summary>
+        /// <typeparam name="T">The type that it needs to implement</typeparam>
+        /// <returns>A List of the types and thier details. So they can be listed and then selected</returns>
+        public List<(Type loadableType, string uniqueId, string name, string description)> GetAvailableBapProviders<T>() where T : IBapProvider;
         /// <summary>
         /// Update the Bap Provider
         /// </summary>
