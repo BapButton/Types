@@ -18,7 +18,7 @@ namespace BAP.Types
         public string CurrentGameUniqueId { get; }
         public string CurrentGameDescription { get; }
         IBapGame UpdateToNewGameType(Type gameType, bool createNewGameIfSameTypeLoaded = false);
-        public Type DynamicComponentToLoad { get; }
-        bool UpdateDynamicComponentToLoad(Type gameType);
+        public Type? DynamicComponentToLoad { get; }
+        public bool UpdateDynamicComponentToLoad(Type pageToLoad, string gameName, string gameDescription, string gameUniqueId);
     }
 }
