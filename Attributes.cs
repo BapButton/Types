@@ -7,9 +7,15 @@ namespace BAP.Types
     public class BapProviderAttribute : Attribute
     {
         public bool AllowMultipleInstances { get; set; }
-        public BapProviderAttribute(bool allowMultipleInstances = false)
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string UniqueId { get; set; }
+        public BapProviderAttribute(string name, string description, string uniqueId, bool allowMultipleInstances = false)
         {
             AllowMultipleInstances = allowMultipleInstances;
+            Name = name;
+            Description = description;
+            UniqueId = uniqueId;
         }
     }
 
