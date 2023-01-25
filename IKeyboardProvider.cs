@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BAP.Types
 {
-    [BapProviderInterface("Kayboard Provider", "")]
+    [BapProviderInterface("Keyboard Provider", "")]
     public interface IKeyboardProvider : IBapProvider
     {
         void ShowKeyboard(int turnOnInMillis = 0);
