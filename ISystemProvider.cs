@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace BAP.Types
 {
     [BapProviderInterface("System Provider", "Make changes to the underlying system - reboot, etc", false)]
-    internal interface ISystemProvider : IBapProvider
+    public interface ISystemProvider : IBapProvider
     {
         public Task<bool> RebootSystem();
         public Task<bool> RebootWebApp();
