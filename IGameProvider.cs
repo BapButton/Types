@@ -8,12 +8,15 @@ namespace BAP.Types
     /// There is a singleton IGameHandler that keeps track of the current game and is responsible for showing it's component. 
     /// Also, it can swap out and end the current game. 
     /// </summary>
-    public interface IGameHandler
+    /// 
+    [BapProviderInterface("Game Provider", "Holds Games in memory and can load and unload games.", false)]
+    public interface IGameProvider : IBapProvider
     {
         IBapGame? CurrentGame { get; }
         bool IsGameRunning { get; }
         bool IsGameSelected { get; }
         Task ForceGameEnd();
+        Task DeselectGame();
         public string CurrentGameName { get; }
         public string CurrentGameUniqueId { get; }
         public string CurrentGameDescription { get; }
