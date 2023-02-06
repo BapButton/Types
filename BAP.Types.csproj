@@ -4,6 +4,13 @@
     <TargetFramework>net7.0</TargetFramework>
     <nullable>enable</nullable>
   </PropertyGroup>
+	
+	
+	<PropertyGroup>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<PackageTags>BAP;BAPFramework</PackageTags>
+	</PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="MessagePack.Annotations" Version="2.4.35" />
