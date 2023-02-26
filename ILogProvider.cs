@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace BAP.Types
 {
     [BapProviderInterface("Log Provider", "Ability to access any logs across the system.", false)]
-    interface ILogProvider : IBapProvider
+    public interface ILogProvider : IBapProvider
     {
         List<LogMessage> GetCurrentLogs();
         List<LogMessage> GetLogs(LogLevel logLevel, int numberToFetch);
