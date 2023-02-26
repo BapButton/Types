@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,22 @@ using System.Threading.Tasks;
 
 namespace BAP.Types
 {
+    public class LogMessage
+    {
+        public int MessageId { get; set; }
+        public string Source { get; set; }
+        public LogLevel Level { get; set; }
+        public string Message { get; set; }
+        public LogMessage(int messageId, string source, LogLevel level, string message)
+        {
+            MessageId = messageId;
+            Source = source;
+            Level = level;
+            Message = message;
+        }
+    }
+
+
     /// <summary>
     /// This is a basic Game Event Message to communicate between a game and the hosting page. 
     /// If your Game page implements the GamePage interface it will be automatically passed into the GameUpdateAsync method.
