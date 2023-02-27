@@ -13,5 +13,6 @@ namespace BAP.Types
     {
         List<LogMessage> GetCurrentLogs();
         List<LogMessage> GetLogs(LogLevel logLevel, int numberToFetch);
+        void RecordNewLogMessage(string source, LogLevel logLevel, string message);
     }
 }
