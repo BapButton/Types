@@ -12,7 +12,7 @@ namespace BAP.Types
     /// It always saves the information for the currently active game. 
     /// So if this is used by an auxilary item that kind of acts like a game it won't save and retrieve correctly. 
     /// </summary>
-    public interface IGameDataSaver<out TSavedForClassName>
+    public interface IGameDataSaver
     {
         public string UniqueIdUserForSaving { get; }
         Task<List<(string difficulty, string difficultyDescription)>> GetCurrentScoreBoards();
@@ -21,5 +21,13 @@ namespace BAP.Types
         Task<T?> GetGameStorage<T>();
         Task<bool> UpdateGameStorage<T>(T itemToSave);
         Task<List<Score>> GetScoresWithNewScoreIfWarranted(Score newScore, int topScoresToTake = 10, bool higherScoreIsBetter = true);
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TSavedForClassName">This is a simple way to setup the saver with a uniqueId that is always tied to the correct class/uniqueID</typeparam>
+    public interface IGameDataSaver<out TSavedForClassName> : IGameDataSaver
+    {
+
     }
 }
