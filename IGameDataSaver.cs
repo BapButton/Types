@@ -18,8 +18,8 @@ namespace BAP.Types
         Task<List<(string difficulty, string difficultyDescription)>> GetCurrentScoreBoards();
         Task<List<Score>> GetScores(string difficulty, int topScoresToTake = 10, bool higherScoreIsBetter = true);
         Task<Score> AddScore(Score newScore);
-        Task<T?> GetGameStorage<T>();
-        Task<bool> UpdateGameStorage<T>(T itemToSave);
+        Task<T?> GetGameStorage<T>(string key = "default");
+        Task<bool> UpdateGameStorage<T>(T itemToSave, string key= "default");
         Task<List<Score>> GetScoresWithNewScoreIfWarranted(Score newScore, int topScoresToTake = 10, bool higherScoreIsBetter = true);
     }
     /// <summary>
