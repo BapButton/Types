@@ -6,14 +6,11 @@ namespace BAP.Types
     [MessagePackObject]
     public class ButtonPress
     {
+        //0 Means Release of the Button
         [Key(0)]
-        public bool IsLongPress { get; set; }
-
-        [Key(1)]
         public bool StartOfPress { get; set; }
-        [Key(2)]
-        public bool EndOfPress { get; set; }
-        [Key(3)]
+        //This would only ever be over 0 if StartOfPress is set to 0
+        [Key(1)]
         public long LengthOfPressInMillis { get; set; }
     }
 }
