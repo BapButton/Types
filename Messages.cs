@@ -155,6 +155,18 @@ namespace BAP.Types
             NodeId = nodeId;
         }
     }
+
+    /// <summary>
+    /// Sends a command to a button to enter testing Mode. If NodeId is blank - nothing happens.
+    /// </summary>
+    public class EnableTestingModeMessage
+    {
+        public string NodeId { get; set; }
+        public EnableTestingModeMessage(string nodeId)
+        {
+            NodeId = nodeId;
+        }
+    }
     /// <summary>
     /// Sends a command to a button to turnOff. If nodeId is blank then all buttons turnoff
     /// </summary>
