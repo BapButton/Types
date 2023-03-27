@@ -27,6 +27,7 @@ namespace BAP.Types
         void StopAllAudio();
         void TurnOffAButton(string nodeId);
         void TurnOffAllButtons();
+        void EnableLocalTestingModeForButton(string nodeId);
     }
 
     public enum TTSLanguage
