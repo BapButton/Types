@@ -35,20 +35,25 @@ namespace BAP.Types
 
         public ButtonImage(List<Byte> bytes, BapColor bapColor)
         {
-            ImageData = new ulong[64];
-            BitArray bits = new BitArray(bytes.ToArray());
-            int length = bits.Length > 63 ? 63 : bits.Length;
-            for (int i = 0; i < length; i++)
+            //This is not the most effecient. But it is the simpliest way I could think of to reverse each row. 
+            ulong[,] imageDataMatrix = new ulong[8, 8];
+            BitArray bitArray = new BitArray(bytes.ToArray());
+            for (int i = 0; i < 8; i++)
             {
-                if (bits[i])
+                for (int j = 0; j < 8; j++)
                 {
-                    ImageData[i] = bapColor.LongColor;
-                }
-                else
-                {
-                    ImageData[i] = 0;
+                    imageDataMatrix[i, j] = bitArray[i * 8 + 7 - j] ? bapColor.LongColor : 0;
                 }
             }
+            List<ulong> data = new List<ulong>();
+            for (int r = 0; r < 8; r++)
+            {
+                for (int c = 0; c < 8; c++)
+                {
+                    data.Add(imageDataMatrix[r, c]);
+                }
+            }
+            ImageData = data.ToArray();
         }
     }
 
